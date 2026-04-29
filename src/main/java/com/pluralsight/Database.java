@@ -2,6 +2,8 @@ package com.pluralsight;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 
 public class Database {
     private String fileName;
@@ -57,8 +59,14 @@ public class Database {
         bufWriter.close();
     }
 
+    /**
+     * Get an array of all past transactions.
+     * The default sort order is by date, newest transactions first.
+     */
     public Transaction[] getTransactions() {
         Transaction[] array = new Transaction[transactions.size()];
-        return transactions.toArray(array);
+        transactions.toArray(array);
+        Arrays.sort(array, Comparator.comparing(Transaction::getDate).reversed());
+        return array;
     }
 }

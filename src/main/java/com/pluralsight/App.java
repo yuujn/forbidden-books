@@ -1,7 +1,6 @@
 package com.pluralsight;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Scanner;
 
@@ -42,9 +41,7 @@ public class App {
                 case "p" -> runMakePayment();
                 case "l" -> LedgerMenu.run();
                 case "x" -> isRunning = false;
-                default -> {
-                    System.out.println("Please enter one of D, P, L, or X.");
-                }
+                default -> System.out.println("Please enter one of D, P, L, or X.");
             }
         }
     }

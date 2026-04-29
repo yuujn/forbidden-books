@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.stream.Stream;
 
 public class Database {
     private String fileName;
@@ -38,5 +39,14 @@ public class Database {
 
     public void addTransaction(Transaction transaction) {
         transactions.add(transaction);
+    }
+
+    public String[] getFieldMap() {
+        return this.fieldMap;
+    }
+
+    public Transaction[] getTransactions() {
+        Transaction[] array = new Transaction[transactions.size()];
+        return transactions.toArray(array);
     }
 }

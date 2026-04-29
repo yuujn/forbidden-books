@@ -20,7 +20,7 @@ public class ReportsMenu {
                 case 1 -> reportMonthToDate();
                 case 2 -> reportPreviousMonth();
                 case 3 -> reportYearToDate();
-                case 4 -> {}
+                case 4 -> reportPreviousYear();
                 case 5 -> {}
                 case 0 -> isRunning = false;
                 default -> System.out.println("Please enter one of 0 through 5.");
@@ -62,6 +62,16 @@ public class ReportsMenu {
         for (Transaction transaction : database.getTransactions()) {
             LocalDate date = transaction.getDate();
             if (date.getYear() == now.getYear()) {
+                LedgerMenu.showTransaction(transaction);
+            }
+        }
+    }
+
+    static void reportPreviousYear() {
+        LocalDateTime lastYear = LocalDateTime.now().minusYears(1);
+        for (Transaction transaction : database.getTransactions()) {
+            LocalDate date = transaction.getDate();
+            if (date.getYear() == lastYear.getYear()) {
                 LedgerMenu.showTransaction(transaction);
             }
         }

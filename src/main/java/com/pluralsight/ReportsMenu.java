@@ -1,5 +1,7 @@
 package com.pluralsight;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class ReportsMenu {
@@ -15,7 +17,7 @@ public class ReportsMenu {
             int choice = Integer.parseInt(scan.nextLine());
 
             switch (choice) {
-                case 1 -> {}
+                case 1 -> reportMonthToDate();
                 case 2 -> {}
                 case 3 -> {}
                 case 4 -> {}
@@ -33,5 +35,15 @@ public class ReportsMenu {
         System.out.println("4) Previous Year");
         System.out.println("5) Search by Vendor");
         System.out.println("0) Back");
+    }
+
+    static void reportMonthToDate() {
+        LocalDateTime now = LocalDateTime.now();
+        for (Transaction transaction : database.getTransactions()) {
+            LocalDate date = transaction.getDate();
+            if (date.getMonthValue() == now.getMonthValue() && date.getYear() == now.getYear()) {
+                LedgerMenu.showTransaction(transaction);
+            }
+        }
     }
 }

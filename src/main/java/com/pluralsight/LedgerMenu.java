@@ -20,7 +20,7 @@ public class LedgerMenu {
             switch (choice.toLowerCase()) {
                 case "a" -> showAllTransactions();
                 case "d" -> showDeposits();
-                case "p" -> {}
+                case "p" -> showPayments();
                 case "r" -> {}
                 case "h" -> isRunning = false;
                 default -> {
@@ -57,6 +57,14 @@ public class LedgerMenu {
     static void showDeposits() {
         for (Transaction transaction : database.getTransactions()) {
             if (transaction.getAmount() >= 0) {
+                showTransaction(transaction);
+            }
+        }
+    }
+
+    static void showPayments() {
+        for (Transaction transaction : database.getTransactions()) {
+            if (transaction.getAmount() < 0) {
                 showTransaction(transaction);
             }
         }

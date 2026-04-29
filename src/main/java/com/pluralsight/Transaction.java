@@ -68,7 +68,7 @@ public class Transaction {
                 case "time" -> time.format(timeFmt);
                 case "description" -> description;
                 case "vendor" -> vendor;
-                case "amount" -> Double.toString(amount);
+                case "amount" -> String.format("%.2f", amount);
                 default -> null;
             };
             if (val != null) {

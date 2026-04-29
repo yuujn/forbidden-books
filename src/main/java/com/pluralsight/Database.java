@@ -33,8 +33,10 @@ public class Database {
             db.transactions.add(transaction);
         }
 
-        System.out.println(db.transactions);
-
         return db;
+    }
+
+    public void addTransaction(Transaction transaction) {
+        transactions.add(transaction);
     }
 }

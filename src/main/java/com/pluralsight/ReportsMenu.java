@@ -21,7 +21,7 @@ public class ReportsMenu {
                 case 2 -> reportPreviousMonth();
                 case 3 -> reportYearToDate();
                 case 4 -> reportPreviousYear();
-                case 5 -> {}
+                case 5 -> searchByVendor();
                 case 0 -> isRunning = false;
                 default -> System.out.println("Please enter one of 0 through 5.");
             }
@@ -72,6 +72,17 @@ public class ReportsMenu {
         for (Transaction transaction : database.getTransactions()) {
             LocalDate date = transaction.getDate();
             if (date.getYear() == lastYear.getYear()) {
+                LedgerMenu.showTransaction(transaction);
+            }
+        }
+    }
+
+    static void searchByVendor() {
+        System.out.print("Enter Vendor Name: ");
+        String vendorName = scan.nextLine();
+
+        for (Transaction transaction : database.getTransactions()) {
+            if (transaction.getVendor().equalsIgnoreCase(vendorName)) {
                 LedgerMenu.showTransaction(transaction);
             }
         }

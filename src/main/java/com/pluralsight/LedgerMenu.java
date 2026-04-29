@@ -21,7 +21,7 @@ public class LedgerMenu {
                 case "a" -> showAllTransactions();
                 case "d" -> showDeposits();
                 case "p" -> showPayments();
-                case "r" -> {}
+                case "r" -> ReportsMenu.run();
                 case "h" -> isRunning = false;
                 default -> {
                     System.out.println("Please enter one of A, D, P, R, or H.");

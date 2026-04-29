@@ -40,7 +40,7 @@ public class App {
             switch (choice.toLowerCase()) {
                 case "d" -> runAddDeposit();
                 case "p" -> runMakePayment();
-                case "l" -> {}
+                case "l" -> LedgerMenu.run();
                 case "x" -> isRunning = false;
                 default -> {
                     System.out.println("Please enter one of D, P, L, or X.");

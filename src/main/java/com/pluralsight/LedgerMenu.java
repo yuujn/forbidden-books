@@ -19,7 +19,7 @@ public class LedgerMenu {
 
             switch (choice.toLowerCase()) {
                 case "a" -> showAllTransactions();
-                case "d" -> {}
+                case "d" -> showDeposits();
                 case "p" -> {}
                 case "r" -> {}
                 case "h" -> isRunning = false;
@@ -38,15 +38,27 @@ public class LedgerMenu {
         System.out.println("H) Home");
     }
 
+    static void showTransaction(Transaction transaction) {
+        System.out.println("---------------------");
+        System.out.printf("Date:        %s%n", transaction.getDate().format(DateTimeFormatter.ofPattern("LLL dd, yyyy")));
+        System.out.printf("Time:        %s%n", transaction.getTime().format(DateTimeFormatter.ofPattern("hh:mm:ss a")));
+        System.out.printf("Description: %s%n", transaction.getDescription());
+        System.out.printf("Vendor:      %s%n", transaction.getVendor());
+        System.out.printf("Amount:      %.2f%n", transaction.getAmount());
+        System.out.println("---------------------");
+    }
+
     static void showAllTransactions() {
         for (Transaction transaction : database.getTransactions()) {
-            System.out.println("---------------------");
-            System.out.printf("Date:        %s%n", transaction.getDate().format(DateTimeFormatter.ofPattern("LLL dd, yyyy")));
-            System.out.printf("Time:        %s%n", transaction.getTime().format(DateTimeFormatter.ofPattern("hh:mm:ss a")));
-            System.out.printf("Description: %s%n", transaction.getDescription());
-            System.out.printf("Vendor:      %s%n", transaction.getVendor());
-            System.out.printf("Amount:      %.2f%n", transaction.getAmount());
-            System.out.println("---------------------");
+            showTransaction(transaction);
+        }
+    }
+
+    static void showDeposits() {
+        for (Transaction transaction : database.getTransactions()) {
+            if (transaction.getAmount() >= 0) {
+                showTransaction(transaction);
+            }
         }
     }
 }

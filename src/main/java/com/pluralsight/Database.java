@@ -1,8 +1,6 @@
 package com.pluralsight;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.stream.Stream;
 
@@ -37,12 +35,29 @@ public class Database {
         return db;
     }
 
-    public void addTransaction(Transaction transaction) {
+    public void addTransaction(Transaction transaction) throws IOException {
         transactions.add(transaction);
+        saveChanges();
     }
 
     public String[] getFieldMap() {
         return this.fieldMap;
+    }
+
+    private void saveChanges() throws IOException {
+        FileWriter fileWriter = new FileWriter(fileName);
+        BufferedWriter bufWriter = new BufferedWriter(fileWriter);
+
+        String header = String.join("|", fieldMap);
+        bufWriter.write(header);
+        bufWriter.newLine();
+
+        for (Transaction transaction : transactions) {
+            bufWriter.write(transaction.toCSVRow(fieldMap));
+            bufWriter.newLine();
+        }
+
+        bufWriter.close();
     }
 
     public Transaction[] getTransactions() {

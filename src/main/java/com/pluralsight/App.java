@@ -77,7 +77,12 @@ public class App {
                 amount
         );
 
-        database.addTransaction(transaction);
+        try {
+            database.addTransaction(transaction);
+        } catch (IOException e) {
+            System.out.println("Failed to add the deposit.");
+            throw new RuntimeException(e);
+        }
     }
 
     static void runMakePayment() {
@@ -96,6 +101,11 @@ public class App {
                 -amount
         );
 
-        database.addTransaction(transaction);
+        try {
+            database.addTransaction(transaction);
+        } catch (IOException e) {
+            System.out.println("Failed to make the payment.");
+            throw new RuntimeException(e);
+        }
     }
 }

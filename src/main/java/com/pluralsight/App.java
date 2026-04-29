@@ -91,7 +91,7 @@ public class App {
         String description = scan.nextLine();
         System.out.print("State who has paid the payment: ");
         String vendor = scan.nextLine();
-        double amount = promptPositiveDouble("Enter the amount of the deposit: ");
+        double amount = promptPositiveDouble("Enter the amount of the payment: ");
 
         Transaction transaction = new Transaction(
                 now.toLocalDate(),

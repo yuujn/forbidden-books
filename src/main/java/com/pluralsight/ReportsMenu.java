@@ -19,7 +19,7 @@ public class ReportsMenu {
             switch (choice) {
                 case 1 -> reportMonthToDate();
                 case 2 -> reportPreviousMonth();
-                case 3 -> {}
+                case 3 -> reportYearToDate();
                 case 4 -> {}
                 case 5 -> {}
                 case 0 -> isRunning = false;
@@ -52,6 +52,16 @@ public class ReportsMenu {
         for (Transaction transaction : database.getTransactions()) {
             LocalDate date = transaction.getDate();
             if (date.getMonthValue() == lastMonth.getMonthValue() && date.getYear() == lastMonth.getYear()) {
+                LedgerMenu.showTransaction(transaction);
+            }
+        }
+    }
+
+    static void reportYearToDate() {
+        LocalDateTime now = LocalDateTime.now();
+        for (Transaction transaction : database.getTransactions()) {
+            LocalDate date = transaction.getDate();
+            if (date.getYear() == now.getYear()) {
                 LedgerMenu.showTransaction(transaction);
             }
         }

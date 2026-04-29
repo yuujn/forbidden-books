@@ -2,7 +2,6 @@ package com.pluralsight;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.stream.Stream;
 
 public class Database {
     private String fileName;
@@ -18,8 +17,6 @@ public class Database {
 
         FileReader fileReader = new FileReader(fileName);
         BufferedReader bufReader = new BufferedReader(fileReader);
-
-        ArrayList<Transaction> transactions = new ArrayList<>();
 
         // The transactions CSV file must have a header row.
         db.fieldMap = bufReader.readLine().split("\\|");

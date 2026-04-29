@@ -18,7 +18,7 @@ public class ReportsMenu {
 
             switch (choice) {
                 case 1 -> reportMonthToDate();
-                case 2 -> {}
+                case 2 -> reportPreviousMonth();
                 case 3 -> {}
                 case 4 -> {}
                 case 5 -> {}
@@ -42,6 +42,16 @@ public class ReportsMenu {
         for (Transaction transaction : database.getTransactions()) {
             LocalDate date = transaction.getDate();
             if (date.getMonthValue() == now.getMonthValue() && date.getYear() == now.getYear()) {
+                LedgerMenu.showTransaction(transaction);
+            }
+        }
+    }
+
+    static void reportPreviousMonth() {
+        LocalDateTime lastMonth = LocalDateTime.now().minusMonths(1);
+        for (Transaction transaction : database.getTransactions()) {
+            LocalDate date = transaction.getDate();
+            if (date.getMonthValue() == lastMonth.getMonthValue() && date.getYear() == lastMonth.getYear()) {
                 LedgerMenu.showTransaction(transaction);
             }
         }

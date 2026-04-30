@@ -146,10 +146,9 @@ public class ReportsMenu {
         Double minAmount = promptOptionalDouble("Minimum Amount: ");
         Double maxAmount = promptOptionalDouble("Maximum Amount: ");
 
-        // TODO: make date ranges inclusive
         Arrays.stream(database.getTransactions())
-                .filter(transaction -> startDate == null || transaction.getDate().isAfter(startDate))
-                .filter(transaction -> endDate == null || transaction.getDate().isBefore(endDate))
+                .filter(transaction -> startDate == null || transaction.getDate().isAfter(startDate.minusDays(1)))
+                .filter(transaction -> endDate == null || transaction.getDate().isBefore(endDate.plusDays(1)))
                 .filter(transaction -> description.isBlank() || transaction.getDescription().toLowerCase().contains(description.toLowerCase()))
                 .filter(transaction -> vendorName.isBlank() || transaction.getVendor().equalsIgnoreCase(vendorName))
                 .filter(transaction -> minAmount == null || transaction.getAmount() >= minAmount)

@@ -113,10 +113,6 @@ public class ReportsMenu {
         }
     }
 
-    // Okay, look, the correct thing to do here is probably to use
-    // OptionalDouble, but... the optional types aren't something we've
-    // covered in the class.
-    // So, a nullable Double it is.
     static Double promptOptionalDouble(String prompt) {
         while (true) {
             System.out.print(prompt);
@@ -146,6 +142,18 @@ public class ReportsMenu {
         Double minAmount = promptOptionalDouble("Minimum Amount: ");
         Double maxAmount = promptOptionalDouble("Maximum Amount: ");
 
+        // Now, you might ask, why in the world would I use lambdas
+        // here when we *definitely* haven't covered them in class?
+        //
+        // In part, I feel this use of lambdas is a natural extension of the fact
+        // that I have already used a few stream methods in prior assignments in this class.
+        //
+        // Additionally, lambdas are *fantastic* with stream adapters.
+        // They can make transforming a stream so nice and concise,
+        // I felt I needed to demonstrate it at some point.
+        //
+        // Otherwise, this could've just been a for-each loop with the same
+        // conditions checked using a series of if statements.
         Arrays.stream(database.getTransactions())
                 .filter(transaction -> startDate == null || transaction.getDate().isAfter(startDate.minusDays(1)))
                 .filter(transaction -> endDate == null || transaction.getDate().isBefore(endDate.plusDays(1)))
